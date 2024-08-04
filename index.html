@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guess the Number Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: rgb(160, 95, 157);
+    }
+
+    #result {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    #input-container {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Guess the Number Game</h1>
+
+<p>Try to guess the number between 1 and 100.</p>
+
+<div id="input-container">
+  <label for="userGuess">Your Guess:</label>
+  <input type="number" id="userGuess" min="1" max="100">
+  <button onclick="checkGuess()">Submit Guess</button>
+</div>
+
+<div id="result"></div>
+<p><a href="todolist.html">Go to To do list</a></p>
+<script>
+  // Generate a random number between 1 and 100
+  const randomNumber = Math.floor(Math.random() * 100) + 1;
+
+  function checkGuess() {
+    const userGuessInput = document.getElementById('userGuess');
+    const resultElement = document.getElementById('result');
+    const userGuess = parseInt(userGuessInput.value, 10);
+
+    if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+      alert('Please enter a valid number between 1 and 100.');
+      return;
+    }
+
+    if (userGuess === randomNumber) {
+      resultElement.textContent = 'Congratulations! You guessed the correct number!';
+      resultElement.style.color = 'green';
+      userGuessInput.disabled = true;
+    } else {
+      const message = userGuess < randomNumber ? 'Too low. Try again.' : 'Too high. Try again.';
+      resultElement.textContent = message;
+      resultElement.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>
